@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as math from 'mathjs';
 
 @Component({
   selector: 'app-calculator',
@@ -6,10 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['calculator.page.scss']
 })
 export class CalculatorPage {
+  previousNumber: string;
   currentNumber: string;
   currentOperation: string;
 
   constructor() {
+    this.previousNumber = "";
     this.currentNumber = "0";
     this.currentOperation = ""
   }
@@ -54,6 +57,27 @@ export class CalculatorPage {
   }
 
   public setOperation(operation: string) {
+    if (this.previousNumber == "") {
+      this.previousNumber = this.currentNumber;
+      this.clearNumber();
+    }
+    else {
+      this.calculate();
+    }
+
     this.currentOperation = operation;
+  }
+
+  private calculate() {
+    var calculation = this.previousNumber + this.currentOperation + this.currentNumber;
+
+    calculation = calculation
+      .replace(',', '.')
+      .replace('x', '*')
+      .replace('÷', '/')
+
+    this.previousNumber = "" + math.evaluate(calculation);
+    this.previousNumber = this.previousNumber.replace('.', ',');
+    this.clearNumber();
   }
 }
