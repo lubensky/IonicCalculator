@@ -39,6 +39,12 @@ export class CalculatorPage {
     this.currentNumber = "0";
   }
 
+  public clearEverything() {
+    this.previousNumber = "";
+    this.currentOperation = "";
+    this.currentNumber = "0";
+  }
+
   public addComma() {
     if (!this.currentNumber.includes(",")) {
       this.currentNumber += ",";
