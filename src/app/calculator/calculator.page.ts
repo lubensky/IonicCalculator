@@ -7,9 +7,11 @@ import { Component } from '@angular/core';
 })
 export class CalculatorPage {
   currentNumber: string;
+  currentOperation: string;
 
   constructor() {
     this.currentNumber = "0";
+    this.currentOperation = ""
   }
 
   public addNumber(num: string) {
@@ -49,5 +51,9 @@ export class CalculatorPage {
         this.currentNumber = "-" + this.currentNumber;
       }
     }
+  }
+
+  public setOperation(operation: string) {
+    this.currentOperation = operation;
   }
 }
