@@ -26,7 +26,11 @@ export class CalculatorPage {
     }
 
     if (this.currentNumber.length == 0) {
-      this.currentNumber = "0";
+      this.clearNumber();
     }
+  }
+
+  public clearNumber() {
+    this.currentNumber = "0";
   }
 }
