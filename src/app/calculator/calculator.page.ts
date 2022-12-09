@@ -68,6 +68,16 @@ export class CalculatorPage {
     this.currentOperation = operation;
   }
 
+  public equals() {
+    if (this.previousNumber != "" && this.currentOperation != "" && this.currentNumber != "") {
+      this.calculate();
+    }
+    else if (this.previousNumber == "" && this.currentNumber != "") {
+      this.previousNumber = this.currentNumber;
+      this.clearNumber();
+    }
+  }
+
   private calculate() {
     var calculation = this.previousNumber + this.currentOperation + this.currentNumber;
 
