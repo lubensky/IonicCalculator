@@ -25,7 +25,7 @@ export class CalculatorPage {
       this.currentNumber = this.currentNumber.slice(0, this.currentNumber.length - 1);
     }
 
-    if (this.currentNumber.length == 0) {
+    if (this.currentNumber.length == 0 || this.currentNumber == "-") {
       this.clearNumber();
     }
   }
@@ -37,6 +37,17 @@ export class CalculatorPage {
   public addComma() {
     if (!this.currentNumber.includes(",")) {
       this.currentNumber += ",";
+    }
+  }
+
+  public toggleSign() {
+    if (this.currentNumber != "0") {
+      if (this.currentNumber.startsWith("-")) {
+        this.currentNumber = this.currentNumber.slice(1);
+      }
+      else {
+        this.currentNumber = "-" + this.currentNumber;
+      }
     }
   }
 }
