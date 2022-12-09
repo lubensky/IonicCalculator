@@ -20,4 +20,13 @@ export class CalculatorPage {
     this.currentNumber += num;
   }
 
+  public removeNumber() {
+    if (this.currentNumber.length > 0) {
+      this.currentNumber = this.currentNumber.slice(0, this.currentNumber.length - 1);
+    }
+
+    if (this.currentNumber.length == 0) {
+      this.currentNumber = "0";
+    }
+  }
 }
