@@ -6,7 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['calculator.page.scss']
 })
 export class CalculatorPage {
+  currentNumber: string;
 
-  constructor() {}
+  constructor() {
+    this.currentNumber = "0";
+  }
+
+  public addNumber(num: string) {
+    if (this.currentNumber == "0") {
+      this.currentNumber = "";
+    }
+
+    this.currentNumber += num;
+  }
 
 }
