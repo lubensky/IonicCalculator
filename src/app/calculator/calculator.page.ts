@@ -13,10 +13,12 @@ export class CalculatorPage {
   clearOnAddNumber: boolean;
 
   constructor() {
-    this.previousNumber = "";
-    this.currentNumber = "0";
-    this.currentOperation = "";
-    this.clearOnAddNumber = true;
+    this.previousNumber = ""; // the result of the previous calculation
+    this.currentNumber = "0"; // the currently entered/modified number
+    this.currentOperation = ""; // the currently selected operatoin
+    // after an operation is executed, the result is retained as the currentNumber
+    // selecting some other number will clear it instead of modifying it
+    this.clearOnAddNumber = true; 
   }
 
   public addNumber(num: string) {
@@ -31,14 +33,15 @@ export class CalculatorPage {
   public removeNumber() {
     if (this.currentNumber.length > 0) {
       this.currentNumber = this.currentNumber.slice(0, this.currentNumber.length - 1);
+      this.clearOnAddNumber = false;
     }
 
     if (this.currentNumber.length == 0 || this.currentNumber == "-") {
-      this.clearNumber();
+      this.clearCurrentNumber();
     }
   }
 
-  public clearNumber() {
+  public clearCurrentNumber() {
     this.currentNumber = "0";
     this.clearOnAddNumber = true;
   }
@@ -46,7 +49,7 @@ export class CalculatorPage {
   public clearEverything() {
     this.previousNumber = "";
     this.currentOperation = "";
-    this.clearNumber();
+    this.clearCurrentNumber();
   }
 
   public addComma() {
@@ -67,11 +70,13 @@ export class CalculatorPage {
   }
 
   public setOperation(operation: string) {
+    // use the current number as left operand
     if (this.previousNumber == "") {
       this.previousNumber = this.currentNumber;
-      this.clearNumber();
+      this.clearOnAddNumber = true;
     }
-    else {
+    // only calculate if user entered fresh number, otherwise only change the operation
+    else if (!this.clearOnAddNumber) {
       this.calculate();
     }
 
@@ -84,7 +89,7 @@ export class CalculatorPage {
     }
     else if (this.previousNumber == "" && this.currentNumber != "") {
       this.previousNumber = this.currentNumber;
-      this.clearNumber();
+      this.clearCurrentNumber();
     }
   }
 
