@@ -10,16 +10,19 @@ export class CalculatorPage {
   previousNumber: string;
   currentNumber: string;
   currentOperation: string;
+  clearOnAddNumber: boolean;
 
   constructor() {
     this.previousNumber = "";
     this.currentNumber = "0";
-    this.currentOperation = ""
+    this.currentOperation = "";
+    this.clearOnAddNumber = true;
   }
 
   public addNumber(num: string) {
-    if (this.currentNumber == "0") {
+    if (this.clearOnAddNumber) {
       this.currentNumber = "";
+      this.clearOnAddNumber = false;
     }
 
     this.currentNumber += num;
@@ -37,12 +40,13 @@ export class CalculatorPage {
 
   public clearNumber() {
     this.currentNumber = "0";
+    this.clearOnAddNumber = true;
   }
 
   public clearEverything() {
     this.previousNumber = "";
     this.currentOperation = "";
-    this.currentNumber = "0";
+    this.clearNumber();
   }
 
   public addComma() {
@@ -93,8 +97,9 @@ export class CalculatorPage {
       .replace('x', '*')
       .replace('÷', '/')
 
-    this.previousNumber = "" + math.evaluate(calculation);
-    this.previousNumber = this.previousNumber.replace('.', ',');
-    this.clearNumber();
+    this.currentNumber = "" + math.evaluate(calculation);
+    this.currentNumber.replace('.', ',');
+    this.previousNumber = this.currentNumber;
+    this.clearOnAddNumber = true;
   }
 }
