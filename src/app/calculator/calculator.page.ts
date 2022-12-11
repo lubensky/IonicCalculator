@@ -89,6 +89,7 @@ export class CalculatorPage {
 
     calculation = calculation
       .replace(',', '.')
+      .replace(',', '.') // only one occurance is replaced but we have up to two
       .replace('x', '*')
       .replace('÷', '/')
 
